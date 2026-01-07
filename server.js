@@ -29,15 +29,19 @@ app.get('/greetings/:username', (req, res) => {
 });
 
 //exercise 2
-app.get('/roll/:number', (req, res) => {
-    const number = req.params.number;
-    if (number){
-        const roll = Math.floor(Math.random() * number) + 1;
-        res.send(`You rolled a ${roll}!`);
-    } else {
-        res.send("Please specify a number");
-    }
+
+app.get("/roll/:number", (req, res) => {
+  const max = Number(req.params.number);
+
+  // 🚨 STOP execution if invalid
+  if (isNaN(max)) {
+    return res.send("You must specify a number.");
+  }
+
+  const roll = Math.floor(Math.random() * (max + 1));
+  res.send(`You rolled a ${roll}!`);
 });
+
 
 //exercise 3
 
